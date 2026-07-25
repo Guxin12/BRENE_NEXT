@@ -38,11 +38,6 @@ fi
 
 ${KSU_BIN} feature save
 
-# Android Verified Boot Hash Spoofing
-if [[ "${config_verified_boot_hash}" != '' ]]; then
-	resetprop_n "ro.boot.vbmeta.digest" "${config_verified_boot_hash}"
-fi
-
 # Developer Options
 if [[ "${config_developer_options}" == "1" ]]; then
 	settings put global development_settings_enabled 1
@@ -435,6 +430,11 @@ if [[ "${config_android_system_properties_spoofing}" == "1" ]]; then
 	else
 		resetprop_n "sys.oem_unlock_allowed" "0"
 	fi
+fi
+
+# Android Verified Boot Hash Spoofing
+if [[ "${config_verified_boot_hash}" != '' ]]; then
+	resetprop_n "ro.boot.vbmeta.digest" "${config_verified_boot_hash}"
 fi
 
 # LineageOS Paths Hiding
