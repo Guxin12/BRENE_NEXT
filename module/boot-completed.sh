@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC2154
 MODDIR=${0%/*}
 KSU_BIN=/data/adb/ksud
 KSU_MODULES_DIR=/data/adb/modules
@@ -443,6 +444,7 @@ if [[ "${config_hide_addon_d}" == "1" ]]; then
 fi
 
 resetprop -c --force
+brene_generate_spoofed_uname
 
 if [[ "${config_brene_logs}" == "1" ]]; then
 	echo "boot-completed.sh ✅" >> "${PERSISTENT_DIR}/log.txt"
