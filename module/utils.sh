@@ -77,17 +77,3 @@ brene_sus_mount() {
 	${KSU_BIN} kernel notify-module-mounted
 	${KSU_BIN} kernel umount add -f 2 "$1" 2> /dev/null
 }
-brene_generate_spoofed_uname() {
-	local slot
-	local kernel_version
-	local kmi
-	local uname_kernel_release
-	local uname_kernel_version
-	slot=$(resetprop ro.boot.slot_suffix)
-	kernel_version=$(strings "/dev/block/by-name/boot${slot}" | grep "Linux version" | awk '{print $3}' | cut -d'-' -f1)
-	kmi=$(${KSU_BIN} boot-info current-kmi | cut -d'-' -f1)
-	uname_kernel_release="${kernel_version}-${kmi}-9-g690101101069"
-	uname_kernel_version="#1 SMP PREEMPT $(resetprop ro.build.date | tr -s ' ')"
-	sed -i "s/^config_uname_kernel_release=.*/config_uname_kernel_release='${uname_kernel_release}'/" ${PERSISTENT_DIR}/config.sh
-	sed -i "s/^config_uname_kernel_version=.*/config_uname_kernel_version='${uname_kernel_version}'/" ${PERSISTENT_DIR}/config.sh
-}

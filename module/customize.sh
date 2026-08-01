@@ -89,8 +89,6 @@ else
 	done < "${MODPATH}/config.sh"
 fi
 
-brene_generate_spoofed_uname
-
 # Disable outdated modules
 # echo "[✅] Disabling outdated modules"
 # modules="

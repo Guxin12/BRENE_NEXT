@@ -443,7 +443,6 @@ if [[ "${config_hide_addon_d}" == "1" ]]; then
 fi
 
 resetprop -c --force
-brene_generate_spoofed_uname
 
 if [[ "${config_brene_logs}" == "1" ]]; then
 	echo "boot-completed.sh ✅" >> "${PERSISTENT_DIR}/log.txt"
