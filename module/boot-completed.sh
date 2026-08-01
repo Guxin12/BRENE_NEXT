@@ -13,14 +13,13 @@ DEST_BIN_DIR=/data/adb/ksu/bin
 [[ -e "${PERSISTENT_DIR}/config.sh" ]] && source "${PERSISTENT_DIR}/config.sh"
 
 # Update Description
+susfs_ver=$(${SUSFS_BIN} show version)
 description="A SuSFS/KernelSU module for SuSFS patched kernels"
-susfs_ver=$(${SUSFS_BIN} show version 2> /dev/null)
 if [[ -n "${susfs_ver}" ]]; then
-	status="[Module Status: ✅ | SuSFS Patches: ✅ ${susfs_ver}+]\\\\n"
+	ksud module config set override.description "[Module Status: ✅ | SuSFS Patches: ✅ ${susfs_ver}] ${description}"
 else
-	status="[Module Status: ❌ | SuSFS Patches: ❌]\\\\n"
+	ksud module config set override.description "[Module Status: ❌ | SuSFS Patches: ❌] ${description}"
 fi
-sed -i "s#^description=.*#description=${status}${description}#" "${MODDIR}/module.prop"
 
 # SU Compat
 if [[ "${config_su_compat}" == "1" ]]; then
