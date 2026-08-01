@@ -7,7 +7,7 @@ PERSISTENT_DIR=/data/adb/brene
 DEST_BIN_DIR=/data/adb/ksu/bin
 
 # Load utils
-[[ -e "${MODDIR}/utils.sh" ]] && source "${MODDIR}/utils.sh"
+[[ -e "${MODPATH}/utils.sh" ]] && source "${MODPATH}/utils.sh"
 
 # Hot Install Support
 export MODULE_HOT_INSTALL_REQUEST="true"
