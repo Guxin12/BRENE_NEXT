@@ -77,7 +77,7 @@ fi
 # Remove Play Integrity Fix Properties
 if [[ "${config_pif_props}" == "1" ]]; then
 	resetprop | grep -iE "pihook|pixelprops|spoof" | awk -F'[][]' '{print $2}' | while read -r prop; do
-		resetprop -d "${prop}"
+		resetprop -d -p "${prop}"
 	done
 fi
 
