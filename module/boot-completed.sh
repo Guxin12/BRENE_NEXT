@@ -16,9 +16,9 @@ DEST_BIN_DIR=/data/adb/ksu/bin
 susfs_ver=$(${SUSFS_BIN} show version)
 description="A SuSFS/KernelSU module for SuSFS patched kernels"
 if [[ -n "${susfs_ver}" ]]; then
-	ksud module config set override.description "[Module Status: ✅ | SuSFS Patches: ✅ ${susfs_ver}] ${description}"
+	${KSU_BIN} module config set override.description "[Module Status: ✅ | SuSFS Patches: ✅ ${susfs_ver}] ${description}"
 else
-	ksud module config set override.description "[Module Status: ❌ | SuSFS Patches: ❌] ${description}"
+	${KSU_BIN} module config set override.description "[Module Status: ❌ | SuSFS Patches: ❌] ${description}"
 fi
 
 # SU Compat
