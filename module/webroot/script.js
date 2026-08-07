@@ -104,6 +104,17 @@ exec('uname -r').then((result) => {
 	container.innerText = result.stdout
 })
 
+// Load Device Model Status
+exec('resetprop ro.product.manufacturer && resetprop ro.product.model').then((result) => {
+	const container = document.querySelector('#device-model .card-row__sub')
+
+	if (result.errno !== 0) {
+		container.innerText = 'Failed to load'
+		return
+	}
+	container.innerText = result.stdout.replace('\n', ' ')
+})
+
 // Load Custom ROM Status
 exec('[[ -n "$(find /system -iname "*lineage*")" ]] && echo "Yes" || echo "No"').then((result) => {
 	const container = document.querySelector('#custom-rom .card-row__sub')
