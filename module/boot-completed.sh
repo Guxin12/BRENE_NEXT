@@ -449,9 +449,9 @@ if [[ "${config_lineage_paths_hiding}" == "1" ]]; then
 	done
 fi
 
-# LineageOS Sepolicy Traces Hiding
-if [[ "${config_lineage_sepolicy_traces_hiding}" == "1" ]]; then
-	find /system /system_ext /vendor /product -iname "*sepolicy.cil" | while read -r path; do
+# Hide LineageOS Strings
+if [[ "${config_hide_lineage_strings}" == "1" ]]; then
+	find /system /system_ext /vendor /product \( -iname "*sepolicy.cil" -o -iname "*file_contexts" \) | while read -r path; do
 		file_name=$(basename "${path}")
 		fake_file_path="${PERSISTENT_DIR}/fake_files/${file_name}"
 
