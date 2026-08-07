@@ -409,8 +409,17 @@ if [[ "${config_android_system_properties_spoofing}" == "1" ]]; then
 	if_prop_value_exits_resetprop_n "ro.vendor.warranty_bit" "0"
 	if_prop_value_exits_resetprop_n "ro.boot.warranty_bit" "0"
 
-	fingerprint=$(resetprop ro.build.fingerprint)
-	resetprop_n "ro.build.fingerprint" "${fingerprint//userdebug/user}"
+	fingerprint_value=$(resetprop ro.build.fingerprint)
+	new_fingerprint_value="${fingerprint_value//userdebug/user}"
+	resetprop_n "ro.bootimage.build.fingerprint" "${new_fingerprint_value}"
+	resetprop_n "ro.build.fingerprint" "${new_fingerprint_value}"
+	resetprop_n "ro.odm.build.fingerprint" "${new_fingerprint_value}"
+	resetprop_n "ro.product.build.fingerprint" "${new_fingerprint_value}"
+	resetprop_n "ro.system.build.fingerprint" "${new_fingerprint_value}"
+	resetprop_n "ro.system_dlkm.build.fingerprint" "${new_fingerprint_value}"
+	resetprop_n "ro.system_ext.build.fingerprint" "${new_fingerprint_value}"
+	resetprop_n "ro.vendor.build.fingerprint" "${new_fingerprint_value}"
+	resetprop_n "ro.vendor_dlkm.build.fingerprint" "${new_fingerprint_value}"
 
 	## Delete some prop names for newer pixel device ##
 	resetprop -d "ro.boot.verifiedbooterror"
