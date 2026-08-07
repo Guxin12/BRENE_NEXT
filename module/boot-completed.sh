@@ -426,6 +426,9 @@ if [[ "${config_android_system_properties_spoofing}" == "1" ]]; then
 	resetprop -d "ro.boot.verifyerrorpart"
 	resetprop -d "crashrecovery.rescue_boot_count"
 
+	resetprop -d service.adb.root
+	resetprop -d service.adb.tcp.port
+
 	if [[ "$(resetprop ro.build.version.sdk)" -ge "36" ]]; then
 		resetprop -d sys.oem_unlock_allowed
 	else
